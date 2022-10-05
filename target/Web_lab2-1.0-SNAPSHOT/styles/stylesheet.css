@@ -19,6 +19,10 @@ table{
     width: 100%;
 }
 
+#main_table, #result_table{
+    padding-left: 45px;
+}
+
 #result_table{
     padding-top: 22px;
 }
@@ -68,7 +72,7 @@ input[type="submit"], button[type="clean_button"]{
 }
 
 button[type="clean_button"]{
-    width: 10%;
+    width: 8%;
 }
 
 
@@ -93,10 +97,6 @@ select[name = "values_R"] {
 
 .message{
     color: magenta;
-}
-
-.results th {
-    padding-left: 25px;
 }
 
 
