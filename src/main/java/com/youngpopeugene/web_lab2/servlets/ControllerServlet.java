@@ -23,7 +23,7 @@ public class ControllerServlet extends HttpServlet {
                 double r = Double.parseDouble(req.getParameter("r"));
                 req.getRequestDispatcher("/check").forward(req, resp);
             } catch (Exception ex) {
-                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                resp.setStatus(400);
             }
 
         }

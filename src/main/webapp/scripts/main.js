@@ -19,6 +19,7 @@ function validateValues(){
     }
     y = document.querySelector('input[name="value_Y"]').value.replace(",", ".");
     r = document.querySelector('option[name="value_R"]:checked').value;
+
     if ($.isNumeric(x) && $.isNumeric(y) && $.isNumeric(r) && y>(-1*5) && y<5){
         document.querySelector('.message').textContent = "";
         return true;
@@ -48,19 +49,9 @@ function sendData(){
                 if (xhr.response.trim() == "true") newRow.insertCell().outerHTML = "<th style = 'color: green'>" + xhr.response.toUpperCase() +"</th>";
                 else newRow.insertCell().outerHTML = "<th style = 'color: red'>" + xhr.response.toUpperCase() +"</th>";
 
+                $("#circle").attr("cx",150 + 100 * x/r );
+                $("#circle").attr("cy",150 - 100 * y/r );
 
-                // $('#circle').after($('<circle>', {
-                //     cx: (150 + 100 * x/r).valueOf(),
-                //     cy: (150 - 100 * y/r).valueOf(),
-                //     r: "3",
-                //     fill: "red",
-                // }));
-
-                // // $("#circle").attr("cx",150 + 100 * x/r );
-                // // $("#circle").attr("cy",150 - 100 * y/r );
-                // var d1 = document.getElementById('circle');
-                // d1.insertAdjacentHTML('afterend',
-                //     '<circle cx = {cx} cy = {cy} r="3" fill="red" stroke-width="0" />');
             }
         }
     }

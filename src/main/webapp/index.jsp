@@ -102,10 +102,7 @@
                     <text x="170" y="102.5">R/2</text>
                     <text x="170" y="202.5">-R/2</text>
                     <text x="170" y="252.5">-R</text>
-<%--                    <circle id="circle" cx="150" cy="150" r="3" fill="red" stroke-width="0" />--%>
-<%--                    <c:forEach items="${collection}" var="col">--%>
-<%--                        <circle cx=${150 + 100 * col.getX()/col.getR()} cy=${150 - 100 * col.getY()/col.getR()}" r="3" fill="red" stroke-width="0"></circle>--%>
-<%--                    </c:forEach>--%>
+                    <circle id="circle" cx="150" cy="150" r="3" fill="red" stroke-width="0"></circle>
                 </svg>
             </td>
         </tr>
