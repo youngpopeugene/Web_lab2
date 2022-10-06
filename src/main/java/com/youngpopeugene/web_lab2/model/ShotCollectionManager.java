@@ -10,7 +10,7 @@ public class ShotCollectionManager {
     }
 
     public static void clear(){
-        collection.clear();
+        collection = new LinkedList<>();
     }
 
     public static LinkedList<Shot> getCollection(){

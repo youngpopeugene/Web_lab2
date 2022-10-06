@@ -1,4 +1,4 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,10 @@
 <table id="main_table">
     <thead>
         <tr>
-            <th class="bio" colspan="2" >Tuliakov Eugene P32101 Var: 1202</th>
+            <th class="bio" id="firstbio" colspan="2" >Tuliakov Eugene P32101</th>
+        </tr>
+        <tr>
+            <th class="bio" id="lastbio" colspan="2" >Var: 1202</th>
         </tr>
     </thead>
     <tbody>
@@ -61,7 +64,7 @@
             </td>
             <td id="col2" class="col">
                 <!-- Координатная плоскость с содержимым -->
-                <svg width="300" height="300" >
+                <svg width="300" height="300" onclick="watcher(event)">
                     <!-- Оси координат -->
                     <line x1="0" x2="300" y1="150" y2="150"></line>
                     <line x1="150" x2="150" y1="0" y2="300"></line>
@@ -99,14 +102,11 @@
                     <text x="170" y="102.5">R/2</text>
                     <text x="170" y="202.5">-R/2</text>
                     <text x="170" y="252.5">-R</text>
-
-                    <circle id="circle" cx="150" cy="150" r="3" fill="red" stroke-width="0"  />
+<%--                    <circle id="circle" cx="150" cy="150" r="3" fill="red" stroke-width="0" />--%>
+<%--                    <c:forEach items="${collection}" var="col">--%>
+<%--                        <circle cx=${150 + 100 * col.getX()/col.getR()} cy=${150 - 100 * col.getY()/col.getR()}" r="3" fill="red" stroke-width="0"></circle>--%>
+<%--                    </c:forEach>--%>
                 </svg>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button type="clean_button">Clean results</button>
             </td>
         </tr>
     </tbody>
@@ -125,9 +125,21 @@
                 <th>${col.getX()}</th>
                 <th>${col.getY()}</th>
                 <th>${col.getR()}</th>
-                <th>${col.isStatus()}</th>
+                <c:choose>
+                    <c:when test="${col.isStatus().toString().trim()=='true'}">
+                        <th style="color: green">${col.isStatus().toString().toUpperCase()}</th>
+                    </c:when>
+                    <c:otherwise>
+                        <th style="color: red">${col.isStatus().toString().toUpperCase()}</th>
+                    </c:otherwise>
+                </c:choose>
             </tr>
         </c:forEach>
+        <tr>
+            <td colspan="4" style="text-align: center">
+                <button onclick="cleanTable()" type="clean_button">Clean results</button>
+            </td>
+        </tr>
     </tbody>
 </table>
 </body>

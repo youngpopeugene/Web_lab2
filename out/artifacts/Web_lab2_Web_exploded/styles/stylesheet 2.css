@@ -65,14 +65,13 @@ label > span{
 svg{
     stroke: #363636;
     fill: #363636;
-    cursor: pointer;
 }
 
 input[type="submit"], button[type="clean_button"]{
     background-color: lightgrey;
     border-radius:6px;
     color: black;
-    cursor: pointer;
+    cursor: url("icons8-minecraft-sword-30.png") 4 12, auto;
     margin-top: 10px;
     padding: 6px 14px;
     border: solid 1px mediumpurple;
@@ -88,15 +87,14 @@ input[type="submit"]:hover, button[type="clean_button"]:hover{
     box-shadow: 0 0 1px #777;
 }
 
-input[type=radio]{
-    cursor: pointer;
+input[type=radio], input[type=text], svg:hover{
+    cursor: url("icons8-minecraft-sword-30.png") 4 12, auto;
 }
 
 input[type=text], select[name = "values_R"] {
     box-shadow:0 0 20px 5px rgba(0,0,0,0.06);
     border-radius: 10px;
     width: 110px;
-    cursor: pointer;
 }
 
 select[name = "values_R"] {
@@ -109,7 +107,6 @@ select[name = "values_R"] {
 
 .results th {
     width: 25%;
-    font-size: 13px;
 }
 
 

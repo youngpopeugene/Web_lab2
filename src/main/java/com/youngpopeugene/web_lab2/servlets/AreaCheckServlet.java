@@ -17,9 +17,9 @@ public class AreaCheckServlet extends HttpServlet {
         double x = Double.parseDouble(req.getParameter("x"));
         double y = Double.parseDouble(req.getParameter("y"));
         double r = Double.parseDouble(req.getParameter("r"));
-        String status = String.valueOf(isHit(x, y, r));
+        Boolean status = isHit(x, y, r);
         resp.getWriter().println(status);
-        ShotCollectionManager.add(new Shot(x, y, r, Boolean.getBoolean(status)));
+        ShotCollectionManager.add(new Shot(x, y, r, status));
         getServletContext().setAttribute("collection", ShotCollectionManager.getCollection());
     }
 
