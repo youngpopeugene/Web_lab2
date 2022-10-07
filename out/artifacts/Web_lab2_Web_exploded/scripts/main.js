@@ -1,6 +1,7 @@
 let x;
 let y;
 let r;
+let prev = 1;
 
 function formHandler(event){
     event.preventDefault();
@@ -39,22 +40,53 @@ function sendData(){
                 let table = document.querySelector('#result_table').getElementsByTagName('tbody')[0];
                 let newRow = table.insertRow(table.rows.length-1);
                 newRow.className = "results";
-                if (x == parseInt(x)) newRow.insertCell().outerHTML = "<th>" + parseInt(x) + ".0" + "</th>";
+                if (x == parseInt(x)) newRow.insertCell().outerHTML = "<th>" + parseInt(x) + ".00" + "</th>";
                 else newRow.insertCell().outerHTML = "<th>" + x + "</th>";
-                if (y == parseInt(y)) newRow.insertCell().outerHTML = "<th>"+ parseInt(y)  + ".0" + "</th>";
+                if (y == parseInt(y)) newRow.insertCell().outerHTML = "<th>"+ parseInt(y)  + ".00" + "</th>";
                 else newRow.insertCell().outerHTML = "<th>"+ y +"</th>";
-                if (r == parseInt(r))  newRow.insertCell().outerHTML = "<th>" + parseInt(r)  + ".0" + "</th>";
+                if (r == parseInt(r))  newRow.insertCell().outerHTML = "<th>" + parseInt(r)  + ".00" + "</th>";
                 else newRow.insertCell().outerHTML = "<th>"+ r +"</th>";
                 console.log(xhr.response);
                 if (xhr.response.trim() == "true") newRow.insertCell().outerHTML = "<th style = 'color: green'>" + xhr.response.toUpperCase() +"</th>";
                 else newRow.insertCell().outerHTML = "<th style = 'color: red'>" + xhr.response.toUpperCase() +"</th>";
 
-                $("#circle").attr("cx",150 + 100 * x/r );
-                $("#circle").attr("cy",150 - 100 * y/r );
-
+                makeDot();
             }
         }
     }
+}
+
+function svgHandler(event){
+    const svg = document.querySelector('svg');
+    const rect = svg.getBoundingClientRect();
+    r = document.querySelector('option[name="value_R"]:checked').value;
+    x = ((event.clientX-rect.left - 150)*(r/2)/50).toFixed(2);
+    y = (((-1)*(event.clientY - rect.top - 150))*(r/2)/50).toFixed(2);
+    sendData(x, y, r);
+}
+
+function makeDot(){
+    let svgns = "http://www.w3.org/2000/svg",
+        container = document.querySelector( 'svg' );
+    let circle = document.createElementNS(svgns, 'circle');
+    circle.setAttributeNS(null, 'class', 'shot' );
+    circle.setAttributeNS(null, 'cx', 150 + 100 * x/r);
+    circle.setAttributeNS(null, 'cy', 150 - 100 * y/r);
+    circle.setAttributeNS(null, 'r', 3);
+    circle.setAttributeNS(null, 'style', 'fill: red; stroke-width: 0;' );
+    container.appendChild(circle);
+}
+
+function moveDots(){
+    let cur = document.querySelector('option[name="value_R"]:checked').value;
+    let shots = document.querySelectorAll( '.shot' );
+    shots.forEach( (shot) => {
+        let cx = shot.getAttribute('cx');
+        let cy = shot.getAttribute('cy');
+        shot.setAttributeNS(null, 'cx', (cx - 150)*prev/cur + 150);
+        shot.setAttributeNS(null, 'cy', 150 - (150 - cy)*prev/cur);
+        });
+    prev = cur;
 }
 
 function cleanTable(){
@@ -70,16 +102,6 @@ function cleanTable(){
             }
         }
     }
-}
-
-function watcher(event){
-    const svg = document.querySelector('svg');
-    const rect = svg.getBoundingClientRect();
-    r = document.querySelector('option[name="value_R"]:checked').value;
-    x = ((event.clientX-rect.left - 150)*(r/2)/50).toPrecision(2);
-    y = (((-1)*(event.clientY - rect.top - 150))*(r/2)/50).toPrecision(2);
-    sendData(x, y, r);
-
 }
 
 

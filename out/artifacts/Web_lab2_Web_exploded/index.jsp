@@ -25,7 +25,7 @@
                 <!-- Форма ввода  -->
                 <fieldset>
                     <legend>Enter data:</legend>
-                    <form class="input_form" onsubmit="formHandler(event); return false;">
+                    <form class="input_form" onsubmit="formHandler(event)">
                         <table id="data_table">
                             <tr><th colspan="3">X value:</th></tr>
                             <tr>
@@ -48,7 +48,7 @@
                             <tr><th colspan="3">R value:</th></tr>
                             <tr>
                                 <td colspan="3">
-                                    <select name="values_R">
+                                    <select name="values_R" onchange="moveDots()">
                                         <option name="value_R" value="1"> 1 </option>
                                         <option name="value_R" value="2"> 2 </option>
                                         <option name="value_R" value="3"> 3 </option>
@@ -64,7 +64,7 @@
             </td>
             <td id="col2" class="col">
                 <!-- Координатная плоскость с содержимым -->
-                <svg width="300" height="300" onclick="watcher(event)">
+                <svg width="300" height="300" onclick="svgHandler(event)">
                     <!-- Оси координат -->
                     <line x1="0" x2="300" y1="150" y2="150"></line>
                     <line x1="150" x2="150" y1="0" y2="300"></line>
@@ -102,7 +102,9 @@
                     <text x="170" y="102.5">R/2</text>
                     <text x="170" y="202.5">-R/2</text>
                     <text x="170" y="252.5">-R</text>
-                    <circle id="circle" cx="150" cy="150" r="3" fill="red" stroke-width="0"></circle>
+                    <c:forEach items="${collection}" var="col">
+                        <circle class = "shot" cx="${150 + 100 * col.getX()/col.getR()}" cy="${150 - 100 * col.getY()/col.getR()}" r="3" fill="red" stroke-width="0"></circle>
+                    </c:forEach>
                 </svg>
             </td>
         </tr>
@@ -119,9 +121,9 @@
         <%--@elvariable id="collection" type="java.util.LinkedList"--%>
         <c:forEach items="${collection}" var="col">
             <tr class = "results">
-                <th>${col.getX()}</th>
-                <th>${col.getY()}</th>
-                <th>${col.getR()}</th>
+                <th>${col.getX().toString().format("%.2f", col.getX()).replaceAll(",",".")}</th>
+                <th>${col.getY().toString().format("%.2f", col.getY()).replaceAll(",",".")}</th>
+                <th>${col.getR().toString().format("%.2f", col.getR()).replaceAll(",",".")}</th>
                 <c:choose>
                     <c:when test="${col.isStatus().toString().trim()=='true'}">
                         <th style="color: green">${col.isStatus().toString().toUpperCase()}</th>
