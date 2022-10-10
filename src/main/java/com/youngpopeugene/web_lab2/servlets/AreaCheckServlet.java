@@ -28,6 +28,7 @@ public class AreaCheckServlet extends HttpServlet {
             resp.getWriter().println(status);
             ShotCollectionManager.add(new Shot(x, y, r, status));
             getServletContext().setAttribute("collection", ShotCollectionManager.getCollection());
+            req.getRequestDispatcher("/result.jsp").include(req, resp);
         }catch (NullPointerException e){
             resp.setStatus(400);
         }
