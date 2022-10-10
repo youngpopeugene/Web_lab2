@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td colspan="4" style="text-align: center">
-                <button onClick="window.location.href='/Web_lab2_Web_exploded/index.jsp';" type="clean_button" onclick="">Main page</button>
+                <button onClick="window.location.href='${pageContext.request.contextPath}';" type="clean_button" onclick="">Main page</button>
             </td>
         </tr>
     </tbody>

@@ -31,7 +31,7 @@ function validateValues(){
 function sendData(){
     let data = "r=" + encodeURIComponent(r) + "&x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y);
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/Web_lab2_Web_exploded/controller?" + data, true);
+    xhr.open("GET", document.URL + "controller?" + data, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send();
     xhr.onreadystatechange = function () {
@@ -51,7 +51,7 @@ function sendData(){
                 // else newRow.insertCell().outerHTML = "<th style = 'color: red'>" + xhr.response.toUpperCase() +"</th>";
                 makeDot();
                 moveDot(r);
-                window.location = '/Web_lab2_Web_exploded/result.jsp';
+                window.location = document.URL + 'result.jsp';
             }
         }
     }
@@ -104,7 +104,7 @@ function moveDot(prev){
 function cleanTable(){
     let data2 = "clean_status=true";
     let xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "/Web_lab2_Web_exploded/controller?" + data2, true);
+    xhr2.open("GET", document.URL + "controller?" + data2, true);
     xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr2.send();
     xhr2.onreadystatechange = function () {
