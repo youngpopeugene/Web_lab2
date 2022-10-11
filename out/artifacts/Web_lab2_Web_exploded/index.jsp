@@ -116,6 +116,8 @@
             <th>X</th>
             <th>Y</th>
             <th>R</th>
+            <th>Timezone</th>
+            <th>Script time</th>
             <th>HIT RESULT</th>
         </tr>
         <%--@elvariable id="collection" type="java.util.LinkedList"--%>
@@ -124,6 +126,8 @@
                 <th>${col.getX().toString().format("%.2f", col.getX()).replaceAll(",",".")}</th>
                 <th>${col.getY().toString().format("%.2f", col.getY()).replaceAll(",",".")}</th>
                 <th>${col.getR().toString().format("%.2f", col.getR()).replaceAll(",",".")}</th>
+                <th>${col.getTimezone().toString()}</th>
+                <th>${col.getScriptTime().toString()}</th>
                 <c:choose>
                     <c:when test="${col.isStatus().toString().trim()=='true'}">
                         <th style="color: green">${col.isStatus().toString().toUpperCase()}</th>
@@ -135,7 +139,7 @@
             </tr>
         </c:forEach>
         <tr>
-            <td colspan="4" style="text-align: center">
+            <td colspan="6" style="text-align: center">
                 <button onclick="cleanTable()" type="clean_button">Clean results</button>
             </td>
         </tr>

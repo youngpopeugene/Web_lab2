@@ -29,7 +29,9 @@ function validateValues(){
 }
 
 function sendData(){
-    let data = "r=" + encodeURIComponent(r) + "&x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y);
+    let timezone = new Date().getTimezoneOffset();
+    console.log(timezone);
+    let data = "r=" + encodeURIComponent(r) + "&x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&timezone=" + encodeURIComponent(timezone);
     let xhr = new XMLHttpRequest();
     xhr.open("GET", document.URL + "controller?" + data, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -51,7 +53,7 @@ function sendData(){
                 // else newRow.insertCell().outerHTML = "<th style = 'color: red'>" + xhr.response.toUpperCase() +"</th>";
                 makeDot();
                 moveDot(r);
-                window.location = document.URL + 'result.jsp';
+                window.location = document.URL + '/result.jsp';
             }
         }
     }

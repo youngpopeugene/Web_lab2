@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,6 +19,7 @@ import java.util.Arrays;
 public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LocalDateTime startTime = LocalDateTime.now(ZoneOffset.UTC);
         try {
             double x = Double.parseDouble(req.getParameter("x"));
             double y = Double.parseDouble(req.getParameter("y"));
@@ -26,7 +30,11 @@ public class AreaCheckServlet extends HttpServlet {
             }
             Boolean status = isHit(x, y, r);
             resp.getWriter().println(status);
-            ShotCollectionManager.add(new Shot(x, y, r, status));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            ShotCollectionManager.add(new Shot(x, y, r,
+                    startTime.minusMinutes(Long.parseLong(req.getParameter("timezone"))).format(formatter),
+                    Math.round(LocalDateTime.now().minusNanos(startTime.getNano()).getNano() * 0.001),
+                    status));
             getServletContext().setAttribute("collection", ShotCollectionManager.getCollection());
             req.getRequestDispatcher("/result.jsp").include(req, resp);
         }catch (NullPointerException e){

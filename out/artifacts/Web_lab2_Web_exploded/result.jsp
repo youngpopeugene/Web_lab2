@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: evgenijtulyakov
-  Date: 10.10.2022
-  Time: 13:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -22,13 +15,17 @@
             <th>X</th>
             <th>Y</th>
             <th>R</th>
+            <th>Timezone</th>
+            <th>Script time</th>
             <th>HIT RESULT</th>
         </tr>
-        <%--@elvariable id="collection" type="java.util.LinkedList"--%>
+<%--        @elvariable id="collection" type="java.util.LinkedList"--%>
         <tr class = "results">
             <th>${collection.getLast().getX().toString().format("%.2f", collection.getLast().getX()).replaceAll(",",".")}</th>
             <th>${collection.getLast().getY().toString().format("%.2f", collection.getLast().getY()).replaceAll(",",".")}</th>
             <th>${collection.getLast().getR().toString().format("%.2f", collection.getLast().getR()).replaceAll(",",".")}</th>
+            <th>${collection.getLast().getTimezone().toString()}</th>
+            <th>${collection.getLast().getScriptTime().toString()}</th>
             <c:choose>
                 <c:when test="${collection.getLast().isStatus().toString().trim()=='true'}">
                     <th style="color: green">${collection.getLast().isStatus().toString().toUpperCase()}</th>
@@ -39,11 +36,12 @@
             </c:choose>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: center">
-                <button onClick="window.location.href='${pageContext.request.contextPath}';" type="clean_button" onclick="">Main page</button>
+            <td colspan="6" style="text-align: center">
+                <button onClick="window.location.replace('./..');" type="clean_button" onclick="">Main page</button>
             </td>
         </tr>
     </tbody>
 </table>
+
 </body>
 </html>
