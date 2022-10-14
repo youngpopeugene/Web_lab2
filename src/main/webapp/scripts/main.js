@@ -53,7 +53,7 @@ function sendData(){
                 // else newRow.insertCell().outerHTML = "<th style = 'color: red'>" + xhr.response.toUpperCase() +"</th>";
                 makeDot();
                 moveDot(r);
-                window.location = document.URL + '/result.jsp';
+                window.location = document.URL + 'result.jsp';
             }
         }
     }
